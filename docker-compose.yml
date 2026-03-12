@@ -1,0 +1,41 @@
+version: "3.9"
+
+services:
+  backend:
+    build:
+      context: ./backend_py
+      dockerfile: Dockerfile
+    container_name: mailstreak-backend
+    env_file:
+      - ./backend_py/.env
+    environment:
+      - REDIS_URL=redis://redis:6379/0
+      - DB_PATH=/data/mailstreak.db
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./backend_py/data:/data
+    depends_on:
+      - redis
+      - postgres
+
+  redis:
+    image: redis:7-alpine
+    container_name: mailstreak-redis
+    ports:
+      - "6379:6379"
+
+  postgres:
+    image: postgres:16-alpine
+    container_name: mailstreak-postgres
+    environment:
+      - POSTGRES_DB=mailstreak
+      - POSTGRES_USER=mailstreak
+      - POSTGRES_PASSWORD=mailstreak
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+volumes:
+  postgres_data:

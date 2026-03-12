@@ -1,0 +1,29 @@
+﻿{
+  "rules": [
+    {
+      "id": "urgent_language",
+      "pattern": "urgent|immediately|asap|act now|final notice",
+      "score": 15
+    },
+    {
+      "id": "credential_harvest",
+      "pattern": "password|login|verify|account|confirm your identity",
+      "score": 20
+    },
+    {
+      "id": "financial_pressure",
+      "pattern": "invoice|payment|bank|transfer|wire|refund",
+      "score": 10
+    },
+    {
+      "id": "suspicious_links",
+      "pattern": "http[s]?://",
+      "score": 15
+    },
+    {
+      "id": "attachment_warning",
+      "pattern": "attachment|.zip|.exe|.scr|.js|.docm|.xlsm",
+      "score": 20
+    }
+  ]
+}
